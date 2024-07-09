@@ -4,7 +4,7 @@ import sendResponse from '../../utils/sendResponse'
 import httpStatus from 'http-status'
 import { categotyServices } from './category.service'
 
-// *Get All bike data
+// *Get All Category data
 const getAllCategoryData = catchAsync(async (req: Request, res: Response) => {
   const result = await categotyServices.getAllCategoryDataFormDB()
   if (result.length > 0) {

@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Bike Rental Reservation System Backend Is Ruuning')
+  res.send('Pro-Gear Backend Is Ruuning')
 })
 
 //* application routes
