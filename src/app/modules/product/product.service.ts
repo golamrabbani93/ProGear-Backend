@@ -7,6 +7,13 @@ const saveProductIntoDB = async (payload: TProduct) => {
   return result
 }
 
+// * Get all Products Data From Database
+const getAllProductDataFormDB = async () => {
+  const result = await Product.find()
+  return result
+}
+
 export const productServices = {
   saveProductIntoDB,
+  getAllProductDataFormDB,
 }

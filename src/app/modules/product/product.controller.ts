@@ -16,6 +16,27 @@ const createProductData = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+// *Get All Product data
+const getAllProductData = catchAsync(async (req: Request, res: Response) => {
+  const result = await productServices.getAllProductDataFormDB()
+  if (result.length > 0) {
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Products retrieved successfully',
+      data: result,
+    })
+  } else {
+    sendResponse(res, {
+      statusCode: httpStatus.NOT_FOUND,
+      success: false,
+      message: 'No Data Found',
+      data: [],
+    })
+  }
+})
+
 export const productController = {
   createProductData,
+  getAllProductData,
 }

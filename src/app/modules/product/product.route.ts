@@ -13,4 +13,7 @@ router.post(
   productController.createProductData,
 )
 
+//* Get all Product Route
+router.get('/', productController.getAllProductData)
+
 export const productRoutes = router
