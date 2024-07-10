@@ -18,7 +18,8 @@ const createProductData = catchAsync(async (req: Request, res: Response) => {
 
 // *Get All Product data
 const getAllProductData = catchAsync(async (req: Request, res: Response) => {
-  const result = await productServices.getAllProductDataFormDB()
+  const query = req.query
+  const result = await productServices.getAllProductDataFormDB(query)
   if (result.length > 0) {
     sendResponse(res, {
       statusCode: httpStatus.OK,
