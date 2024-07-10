@@ -16,4 +16,7 @@ router.post(
 //* Get all Product Route
 router.get('/', productController.getAllProductData)
 
+//* Get Single Product Route
+router.get('/:id', productController.getSingleProductData)
+
 export const productRoutes = router

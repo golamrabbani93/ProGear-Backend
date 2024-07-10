@@ -23,7 +23,15 @@ const getAllProductDataFormDB = async (query: Record<string, unknown>) => {
   return result
 }
 
+// * Get single product  Data By Bike Id
+
+const getSingleProductDataFromDB = async (id: string) => {
+  const result = await Product.findById(id)
+  return result
+}
+
 export const productServices = {
   saveProductIntoDB,
   getAllProductDataFormDB,
+  getSingleProductDataFromDB,
 }
