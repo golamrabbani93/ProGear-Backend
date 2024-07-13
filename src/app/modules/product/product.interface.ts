@@ -6,6 +6,6 @@ export type TProduct = {
   category: string
   rating?: number
   brand: string
-  quantity: number
-  inStock?: boolean
+  quantity?: number
+  stock: number
 }

@@ -13,10 +13,18 @@ router.post(
   productController.createProductData,
 )
 
+// update Product
+router.put(
+  '/:id',
+  validateRequest(productValidation.updateProductValidationSchema),
+  productController.updateProductData,
+)
+
 //* Get all Product Route
 router.get('/', productController.getAllProductData)
 
 //* Get Single Product Route
 router.get('/:id', productController.getSingleProductData)
+router.delete('/:id', productController.deleteSingleProductData)
 
 export const productRoutes = router

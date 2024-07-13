@@ -58,8 +58,36 @@ const getSingleProductData = catchAsync(async (req: Request, res: Response) => {
   }
 })
 
+// *create Product  data
+const updateProductData = catchAsync(async (req: Request, res: Response) => {
+  const productData = req.body
+  const { id } = req.params
+  const result = await productServices.updateProductIntoDB(id, productData)
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Product Updated successfully',
+    data: result,
+  })
+})
+// *delete Product  data
+const deleteSingleProductData = catchAsync(
+  async (req: Request, res: Response) => {
+    const { id } = req.params
+    const result = await productServices.deleteSingleProductDataFromDB(id)
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Product Deleted successfully',
+      data: result,
+    })
+  },
+)
+
 export const productController = {
   createProductData,
   getAllProductData,
   getSingleProductData,
+  updateProductData,
+  deleteSingleProductData,
 }

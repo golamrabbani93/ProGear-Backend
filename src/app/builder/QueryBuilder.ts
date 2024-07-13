@@ -29,7 +29,15 @@ class QueryBuilder<T> {
     const queryObj = { ...this.query } // copy
 
     // Filtering
-    const excludeFields = ['searchTerm', 'sort', 'limit', 'page', 'fields']
+    const excludeFields = [
+      'searchTerm',
+      'sort',
+      'limit',
+      'page',
+      'fields',
+      'min',
+      'max',
+    ]
 
     excludeFields.forEach((el) => delete queryObj[el])
 
@@ -59,23 +67,14 @@ class QueryBuilder<T> {
       parsedQueryObj.rating = { $gte: Number(queryObj.rating) }
     }
 
-    if (queryObj.price) {
-      interface PriceFilter {
-        $gte?: number
-        $lte?: number
-      }
+    if (this.query.min && this.query.max) {
+      const minPrice = Number(this.query.min)
+      const maxPrice = Number(this.query.max)
 
-      const priceFilter: PriceFilter = {}
-      const priceRange = (queryObj.price as string).split(',')
-      priceRange.forEach((range) => {
-        const [key, value] = range.split('-')
-        if (key === 'min') {
-          priceFilter.$gte = Number(value)
-        } else if (key === 'max') {
-          priceFilter.$lte = Number(value)
-        }
-      })
-      parsedQueryObj.price = priceFilter
+      parsedQueryObj.price = {
+        $gte: minPrice,
+        $lte: maxPrice,
+      }
     }
 
     this.modelQuery = this.modelQuery.find(parsedQueryObj as FilterQuery<T>)
@@ -91,15 +90,15 @@ class QueryBuilder<T> {
     return this
   }
   //  * Paginatio Query
-  paginate() {
-    const page = Number(this?.query?.page) || 1
-    const limit = Number(this?.query?.limit) || 10
-    const skip = (page - 1) * limit
+  //   paginate() {
+  //     const page = Number(this?.query?.page) || 1
+  //     const limit = Number(this?.query?.limit) || 10
+  //     const skip = (page - 1) * limit
 
-    this.modelQuery = this.modelQuery.skip(skip).limit(limit)
+  //     this.modelQuery = this.modelQuery.skip(skip).limit(limit)
 
-    return this
-  }
+  //     return this
+  //   }
   //  * Fields Query
   fields() {
     const fields =
